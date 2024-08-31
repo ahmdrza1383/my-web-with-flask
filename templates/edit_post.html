@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+{% block page_title %}
+  ویرایش پست "{{ post.title }}"
+{% endblock %}
+
+{% block style_code %}
+  <style>
+    .form-group label {
+      font-weight: bold;
+    }
+    
+    .edit-post-form button {
+      margin-top: 20px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="card shadow my-3 p-5">
+      <h1>ویرایش پست</h1>
+      <form class="edit-post-form" action="/edit-post/{{ post.id }}" method="POST">
+        <div class="form-group">
+          <label for="postTitle">عنوان</label>
+          <input type="text" class="form-control" id="postTitle" name="title" value="{{ post.title }}" required />
+        </div>
+        <div class="form-group">
+          <label for="postBody">متن</label>
+          <textarea class="form-control" id="postBody" name="body" rows="8" required>{{ post.body }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">به روزرسانی پست</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://kit.fontawesome.com/59ef5663cc.js" crossorigin="anonymous"></script>
+{% endblock %}

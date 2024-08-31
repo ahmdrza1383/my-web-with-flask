@@ -1,0 +1,57 @@
+{% extends '_base.html' %}
+{% block page_title %}
+  ایجاد پست
+{% endblock %}
+{% block style_code %}
+  <style>
+    .form-group label {
+      font-weight: bold;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="card shadow-sm my-3">
+      <div class="card-body">
+        <h3 class="text-center">ایجاد پست جدید</h3>
+        <form id="postForm" action="/add-post" method="POST">
+          <div class="form-group">
+            <label for="postTitle">عنوان</label>
+            <input type="text" class="form-control" id="postTitle" placeholder="عنوان پست را وارد کنید" required name="title" />
+          </div>
+          <div class="form-group">
+            <label for="postBody">متن</label>
+            <textarea class="form-control" id="postBody" rows="5" placeholder="متن پست را وارد کنید" required name="body"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">ایجاد پست</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.getElementById('postForm').addEventListener('submit', function (event) {
+      event.preventDefault()
+    
+      Swal.fire({
+        title: 'آیا مطمئن هستید؟',
+        text: 'می خواهید این پست را انتشار دهید؟',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'بله پستش کن!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById('postForm').submit()
+        }
+      })
+    })
+  </script>
+{% endblock %}

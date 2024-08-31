@@ -1,0 +1,26 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+  همه پست ها
+{% endblock %}
+
+{% block style_code %}
+
+{% endblock %}
+
+{% block content %}
+  <div class="post-list">
+    <div class="container mt-4">
+      {% for post in posts %}
+        <div class="card shadow-sm my-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted small py-2">توسط : {{ post.author.username }}</h6>
+            <p class="card-text py-3">{{ post.body }}</p>
+            <a class="btn btn-sm btn-primary" href="/all-post/{{ post.id }}/{{ post.title }}">مشاهده پست</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

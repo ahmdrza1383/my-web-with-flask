@@ -1,0 +1,37 @@
+{% extends '_base.html' %}
+{% block page_title %}
+  خانه
+{% endblock %}
+{% block style_code %}
+
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid bg-info">
+    <div class="row py-3">
+      <div class="col-md-8 col-md-10 mx-auto">
+        <h3 class="my-4 mt-3 text-white">به وبلاگ من خوش آمدی.</h3>
+        <p class="text-light">شما می توانید پست های سایت را مشاهده کنید. و برای ایجاد پست و فعالیت های دیگر وارد حساب کاربری خود شوید.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h4 class="mt-4">پست های اخیرا اضافه شده...</h4>
+  </div>
+
+  <div class="post-list">
+    <div class="container mt-4">
+      {% for post in posts %}
+        <div class="card shadow-sm my-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted small py-2">توسط : {{ post.author.username }}</h6>
+            <p class="card-text py-3">{{ post.body }}</p>
+            <a class="btn btn-sm btn-primary" href="/all-post/{{ post.id }}/{{ post.title }}">مشاهده پست</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

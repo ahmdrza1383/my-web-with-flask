@@ -1,0 +1,137 @@
+{% extends '_base.html' %}
+{% block page_title %}
+  Log In
+{% endblock %}
+
+{% block style_code %}
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+    
+    .card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card p {
+      font-size: 1.2em;
+      color: #333;
+    }
+    
+    .row.mx-auto {
+      margin-bottom: 20px;
+    }
+    
+    .division {
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .line {
+      height: 1px;
+      background-color: #ccc;
+      position: relative;
+      top: 50%;
+    }
+    
+    .line.l {
+      margin-right: 10px;
+    }
+    
+    .line.r {
+      margin-left: 10px;
+    }
+    
+    .form-group input {
+      border-radius: 5px;
+      border: 1px solid #ced4da;
+      padding: 10px;
+    }
+    
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+    
+    .message {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row d-flex justify-content-center mt-5">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card py-3 px-2">
+          <p class="text-center mb-3 mt-2">ورود با استفاده از :</p>
+          <div class="row mx-auto">
+            <div class="col-4">
+              <i class="fab fa-twitter"></i>
+            </div>
+            <div class="col-4">
+              <i class="fab fa-facebook"></i>
+            </div>
+            <div class="col-4">
+              <a href="/login/oauth"><i class="fab fa-google"></i></a>
+            </div>
+          </div>
+          <div class="division">
+            <div class="row">
+              <div class="col-3">
+                <div class="line l"></div>
+              </div>
+              <div class="col-6 text-center">
+                <span>یا ورود با استفاده از پست الکترونیکی</span>
+              </div>
+              <div class="col-3">
+                <div class="line r"></div>
+              </div>
+            </div>
+          </div>
+          <form class="myform" action="/login" method="POST">
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="پست الکترونیکی" name="email" />
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="رمز عبور" name="password" />
+            </div>
+
+            {% with messages=get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <ul class="flashes text-center">
+                  {% for category, message in messages %}
+                    <p class="text-danger text-center">{{ message }}</p>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group form-check">
+                  <label class="form-check-label" for="exampleCheck1">مرا به یاد داشته باش</label>
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                </div>
+              </div>
+              <div class="col-md-6 col-12 bn">رمز عبور خود را فراموش کردید؟</div>
+            </div>
+            <div class="form-group mt-3">
+              <button type="submit" class="btn btn-block btn-primary btn-lg"><small><i class="far fa-user pr-2"></i>ورود</small></button>
+            </div>
+            <p class="message">
+              حساب کاربری ندارید؟ <a href="/signup">ایجاد حساب</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

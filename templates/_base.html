@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block page_title %}
+
+      {% endblock %}
+    </title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- sweet alert -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css" />
+
+    <style>
+      @font-face {
+        font-family: Samim-FD;
+        src: url('../static/font/Samim-FD.woff');
+        font-weight: normal;
+      }
+      * {
+        direction: rtl;
+        text-align: right;
+      }
+      body {
+        font-family: Samim-FD;
+        line-height: 1.6;
+        text-align: right;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+    </style>
+    {% block style_code %}
+
+    {% endblock %}
+  </head>
+  <body>
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary" dir="rtl">
+      <div class="container-fluid">
+        <a href="/"><img src="/static/images/logo.png" alt="DESCRIPTION" width="45" height="40" /></a>
+        <a class="navbar-brand" href="/">وبلاگ من</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="navbar-nav">
+            <a class="nav-link" href="/all-post">همه پست ها</a>
+            {% if user_authenticated1 %}
+              <a class="nav-link" href="/my-posts">پست های من</a>
+              <a class="nav-link" href="/add-post">ایجاد پست</a>
+              <a class="nav-link" href="/user/profile">پروفایل</a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="mx-2 text-white navbar-nav">
+          {% if user_authenticated1 %}
+            <div class="nav-link active">خوش آمدی {{ username1 }}</div>
+            <a class="nav-link active" href="/logout">خروج</a>
+          {% else %}
+            <a class="nav-link active" href="/login">ورود</a>
+            <a class="nav-link active" href="/signup">ثبت نام</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/59ef5663cc.js" crossorigin="anonymous"></script>
+  </body>
+</html>

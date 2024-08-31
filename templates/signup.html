@@ -1,0 +1,147 @@
+{% extends '_base.html' %}
+{% block page_title %}
+  Sign Up
+{% endblock %}
+
+{% block style_code %}
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+    
+    .card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card p {
+      font-size: 1.2em;
+      color: #333;
+    }
+    
+    .row.mx-auto {
+      margin-bottom: 20px;
+    }
+    
+    .division {
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .line {
+      height: 1px;
+      background-color: #ccc;
+      position: relative;
+      top: 50%;
+    }
+    
+    .line.l {
+      margin-right: 10px;
+    }
+    
+    .line.r {
+      margin-left: 10px;
+    }
+    
+    .form-group input {
+      border-radius: 5px;
+      border: 1px solid #ced4da;
+      padding: 10px;
+    }
+    
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+    
+    .message {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row d-flex justify-content-center mt-5">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card py-3 px-2">
+          <p class="text-center mb-3 mt-2">ورود با استفاده از :</p>
+          <div class="row mx-auto">
+            <div class="col-4">
+              <i class="fab fa-twitter"></i>
+            </div>
+            <div class="col-4">
+              <i class="fab fa-facebook"></i>
+            </div>
+            <div class="col-4">
+              <a href="/login/oauth"><i class="fab fa-google"></i></a>
+            </div>
+          </div>
+          <div class="division">
+            <div class="row">
+              <div class="col-3">
+                <div class="line l"></div>
+              </div>
+              <div class="col-6 text-center">
+                <span>یا ایجاد حساب جدید</span>
+              </div>
+              <div class="col-3">
+                <div class="line r"></div>
+              </div>
+            </div>
+          </div>
+          <form class="myform" id="signupform" action="/signup" method="POST">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="پست الکترونیکی" name="email" id="email" />
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="نام کاربری" name="username" id="username" />
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="رمز عبور" name="password" id="password" />
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="تایید رمز عبور" name="confirm_password" id="confirm_password" />
+            </div>
+            <div class="form-group mt-3">
+              <button type="submit" class="btn btn-block btn-primary btn-lg"><small><i class="far fa-user pr-2"></i>ثبت نام</small></button>
+            </div>
+
+
+
+            <p class="message">
+              شما حساب کاربری دارید؟ <a href="/login">ورود</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function (event) {
+      var email = document.getElementById('email').value
+      var password = document.getElementById('password').value
+      var confirmPassword = document.getElementById('confirm_password').value
+    
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.')
+        event.preventDefault()
+        return
+      }
+    
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.')
+        event.preventDefault()
+        return
+      }
+    })
+  </script>
+{% endblock %}

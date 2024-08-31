@@ -1,0 +1,80 @@
+{% extends '_base.html' %}
+{% block page_title %}
+  ویرایش پروفایل
+{% endblock %}
+{% block style_code %}
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .btn-primary {
+      margin-top: 20px;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="card shadow my-3 p-5">
+      <h1 class="text-center">ویرایش پروفایل</h1>
+      <form id="edit-profile-form" action="/user/profile/edit" method="POST">
+        <div class="form-group">
+          <label for="username">نام کاربری :</label>
+          <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required />
+        </div>
+        <div class="form-group">
+          <label for="email">پست الکترونیکی</label>
+          <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required />
+        </div>
+        <div class="form-group">
+          <label for="password">رمز عبور جدید :</label>
+          <input type="password" class="form-control" id="password" name="password" />
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">تایید رمز عبور جدید :</label>
+          <input type="password" class="form-control" id="confirm_password" name="confirm_password" />
+        </div>
+        <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.getElementById('edit-profile-form').addEventListener('submit', function (event) {
+      event.preventDefault()
+    
+      const password = document.getElementById('password').value
+      const confirmPassword = document.getElementById('confirm_password').value
+    
+      if (password !== confirmPassword) {
+        Swal.fire({
+          title: 'Password Mismatch',
+          text: 'The passwords do not match. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+        return
+      }
+    
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to save the changes?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, save it!',
+        cancelButtonText: 'Cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById('edit-profile-form').submit()
+        }
+      })
+    })
+  </script>
+{% endblock %}
